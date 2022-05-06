@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  postgres:
+    image: "postgres:14"
+    container_name: "java-postgres_person_db"
+    environment:
+      POSTGRES_DB: "person_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      context: ./
+      dockerfile: "rest_db_application.Dockerfile"
+    container_name: "java-rest_db_application"
+    environment:
+      PORT: "8722"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres/person_db"
+    ports:
+      - "8722:8722"
+    depends_on:
+      - "postgres"

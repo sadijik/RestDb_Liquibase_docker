@@ -1,0 +1,26 @@
+server:
+  port: 8722
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/person_db
+    hikari:
+      username: postgres
+      password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+  liquibase:
+    change-log: classpath:db.chagelog/db.changelog-master.yml
+    enabled: true
+    contexts: dev
+
+
+
+
+
